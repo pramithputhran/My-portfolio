@@ -295,9 +295,8 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
                 key={id}
                 type="button"
                 onClick={() => setActive(id)}
-                className={`mb-1 flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left text-sm font-bold last:mb-0 ${
-                  active === id ? "bg-accent text-bg" : "text-muted hover:bg-bg hover:text-text"
-                }`}
+                className={`mb-1 flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left text-sm font-bold last:mb-0 ${active === id ? "bg-accent text-bg" : "text-muted hover:bg-bg hover:text-text"
+                  }`}
               >
                 <Icon className="h-4 w-4" />
                 {label}
@@ -555,7 +554,7 @@ function ListHeader({ label, onAdd }: { label: string; onAdd: () => void }) {
 
 function FixedSocialEditor({ items, setItems }: { items: SocialLink[]; setItems: (items: SocialLink[]) => void }) {
   const requiredIcons = ["Github", "Linkedin", "Instagram", "LeetCode"] as const;
-  
+
   const fixedItems = requiredIcons.map(icon => {
     return items.find(item => item.icon === icon) || { label: icon, href: "https://", icon };
   });
@@ -568,9 +567,9 @@ function FixedSocialEditor({ items, setItems }: { items: SocialLink[]; setItems:
           <div key={item.icon} className="rounded border border-line bg-bg p-4 flex items-center gap-4">
             <span className="w-24 font-bold text-text">{item.label}</span>
             <div className="flex-1">
-              <input 
-                type="text" 
-                value={item.href} 
+              <input
+                type="text"
+                value={item.href}
                 onChange={(e) => {
                   const newItems = [...fixedItems];
                   newItems[index] = { ...newItems[index], href: e.target.value };
