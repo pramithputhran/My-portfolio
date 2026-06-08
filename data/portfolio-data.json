@@ -1,0 +1,364 @@
+{
+  "site": {
+    "initials": "PP",
+    "ownerName": "Pramith P Puthran",
+    "title": "Pramith P Puthran | Developer Portfolio",
+    "description": "A polished developer portfolio with clean UI, smooth motion, projects, tools, education, and contact.",
+    "navCtaLabel": "Let's talk"
+  },
+  "hero": {
+    "availableLabel": "Available for work",
+    "greeting": "Hi, I'm",
+    "name": "Pramith P Puthran",
+    "roles": [
+      "Developer",
+      "Designer",
+      "Creator"
+    ],
+    "summary": "I build fast, tactile interfaces with sharp systems thinking, expressive motion, and enough restraint to keep the product easy to use.",
+    "image": "/images/hero-image.png",
+    "primaryCta": {
+      "label": "View my work",
+      "href": "#projects"
+    },
+    "resumeCta": {
+      "label": "Download Resume",
+      "href": "/cv.pdf"
+    },
+    "socials": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com",
+        "icon": "Github"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://linkedin.com",
+        "icon": "Linkedin"
+      },
+      {
+        "label": "Instagram",
+        "href": "https://instagram.com",
+        "icon": "Instagram"
+      },
+      {
+        "label": "LeetCode",
+        "href": "https://leetcode.com",
+        "icon": "Code2"
+      }
+    ]
+  },
+  "about": {
+    "overline": "About me",
+    "heading": "I build clean, fast digital products",
+    "paragraphs": [
+      "I am a developer focused on building polished web experiences with practical code, smooth interfaces, and reliable product thinking.",
+      "This summary is intentionally simple so you can replace it manually with your own story later."
+    ],
+    "profileLabel": "Developer profile",
+    "profileName": "Pramith P Puthran",
+    "codeFocus": "frontend + full-stack",
+    "codeStyle": "fast, clean, useful",
+    "stack": [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Firebase",
+      "Python",
+      "ML"
+    ],
+    "currentBuildingLabel": "Currently building",
+    "quickDetails": [
+      {
+        "icon": "MapPin",
+        "label": "Location",
+        "value": "Udupi, Karnataka, India",
+        "href": "#"
+      },
+      {
+        "icon": "Mail",
+        "label": "Email",
+        "value": "pramithputhran1@gmail.com",
+        "href": "mailto:pramithputhran1@gmail.com"
+      },
+      {
+        "icon": "Phone",
+        "label": "Phone",
+        "value": "+91 8217393145",
+        "href": "tel:+918217393145"
+      }
+    ],
+    "availabilityText": "Open to internships & collaborative projects"
+  },
+  "education": {
+    "overline": "Education",
+    "heading": "Built from strong foundations",
+    "entries": [
+      {
+        "title": "Degree College / B.Tech",
+        "institution": "Your Engineering College",
+        "year": "2020 - 2024",
+        "score": 82,
+        "label": "82%",
+        "subjects": [
+          "Web Engineering",
+          "Data Structures",
+          "Cloud"
+        ]
+      },
+      {
+        "title": "PU College / 12th",
+        "institution": "Your PU College",
+        "year": "2020",
+        "score": 88,
+        "label": "88%",
+        "subjects": [
+          "Physics",
+          "Chemistry",
+          "Mathematics"
+        ]
+      },
+      {
+        "title": "High School / SSLC",
+        "institution": "Your High School",
+        "year": "2018",
+        "score": 92,
+        "label": "92%",
+        "subjects": [
+          "Science",
+          "Mathematics",
+          "English"
+        ]
+      }
+    ],
+    "certifications": [
+      {
+        "name": "Frontend Engineering",
+        "body": "Meta",
+        "year": "2024",
+        "verifyHref": "#"
+      },
+      {
+        "name": "Cloud Foundations",
+        "body": "AWS Academy",
+        "year": "2023",
+        "verifyHref": "#"
+      },
+      {
+        "name": "UI Design Systems",
+        "body": "Google",
+        "year": "2023",
+        "verifyHref": "#"
+      }
+    ]
+  },
+  "tools": {
+    "overline": "Tools & technologies",
+    "heading": "My technical toolkit",
+    "tabs": [
+      "All",
+      "Frontend",
+      "Backend",
+      "Database",
+      "Design",
+      "DevOps"
+    ],
+    "items": [
+      {
+        "name": "React",
+        "category": "Frontend",
+        "level": 92,
+        "years": "3+",
+        "icon": "Code2"
+      },
+      {
+        "name": "Next.js",
+        "category": "Frontend",
+        "level": 90,
+        "years": "2+",
+        "icon": "Layers3"
+      },
+      {
+        "name": "TypeScript",
+        "category": "Frontend",
+        "level": 88,
+        "years": "3+",
+        "icon": "Terminal"
+      },
+      {
+        "name": "Tailwind",
+        "category": "Frontend",
+        "level": 94,
+        "years": "3+",
+        "icon": "Wind"
+      },
+      {
+        "name": "Node.js",
+        "category": "Backend",
+        "level": 82,
+        "years": "2+",
+        "icon": "Server"
+      },
+      {
+        "name": "Express",
+        "category": "Backend",
+        "level": 78,
+        "years": "2+",
+        "icon": "Code2"
+      },
+      {
+        "name": "MongoDB",
+        "category": "Database",
+        "level": 80,
+        "years": "2+",
+        "icon": "Database"
+      },
+      {
+        "name": "Postgres",
+        "category": "Database",
+        "level": 72,
+        "years": "1+",
+        "icon": "Database"
+      },
+      {
+        "name": "Figma",
+        "category": "Design",
+        "level": 86,
+        "years": "3+",
+        "icon": "Figma"
+      },
+      {
+        "name": "GSAP",
+        "category": "Frontend",
+        "level": 84,
+        "years": "1+",
+        "icon": "Sparkles"
+      },
+      {
+        "name": "Git",
+        "category": "DevOps",
+        "level": 88,
+        "years": "3+",
+        "icon": "GitBranch"
+      },
+      {
+        "name": "Vercel",
+        "category": "DevOps",
+        "level": 83,
+        "years": "2+",
+        "icon": "Cloud"
+      }
+    ],
+    "bars": [
+      {
+        "label": "Frontend",
+        "value": 92
+      },
+      {
+        "label": "Backend",
+        "value": 80
+      },
+      {
+        "label": "Design systems",
+        "value": 86
+      }
+    ],
+    "exploringLabel": "Currently exploring ->",
+    "exploring": [
+      "Rust",
+      "LangChain",
+      "Three.js"
+    ]
+  },
+  "projects": {
+    "overline": "Projects",
+    "heading": "Heading of the Projects",
+    "summary": "For now this section keeps one strong project card, with every detail a real portfolio project needs.",
+    "items": [
+      {
+        "title": "TaskFlow Dashboard",
+        "label": "Demo project",
+        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=85",
+        "description": "A modern productivity dashboard for tracking tasks, deadlines, team activity, and project health in one clean interface.",
+        "stack": [
+          "Next.js",
+          "TypeScript",
+          "Tailwind CSS",
+          "GSAP",
+          "Firebase"
+        ],
+        "highlights": [
+          "Responsive dashboard UI",
+          "Animated status cards",
+          "Clean component structure"
+        ],
+        "metric": "Fast, polished, and portfolio-ready",
+        "status": "Demo ready",
+        "type": "Web app",
+        "liveHref": "#",
+        "sourceHref": "#"
+      }
+    ]
+  },
+  "contact": {
+    "overline": "Contact",
+    "heading": "Let's build something useful",
+    "summary": "Have a project, internship opportunity, or collaboration idea? Send a message and I'll get back to you.",
+    "email": "pramithputhran1@gmail.com",
+    "phone": "+91 8217393145",
+    "location": "Udupi, Karnataka, India",
+    "cards": [
+      {
+        "icon": "Mail",
+        "label": "Email",
+        "value": "pramithputhran1@gmail.com",
+        "href": "mailto:pramithputhran1@gmail.com"
+      },
+      {
+        "icon": "Phone",
+        "label": "Phone",
+        "value": "+91 8217393145",
+        "href": "tel:+918217393145"
+      },
+      {
+        "icon": "MapPin",
+        "label": "Location",
+        "value": "Udupi, Karnataka, India",
+        "href": "#"
+      }
+    ],
+    "socialLinks": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com",
+        "icon": "Github"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://linkedin.com",
+        "icon": "Linkedin"
+      },
+      {
+        "label": "Instagram",
+        "href": "https://youtube.com",
+        "icon": "Instagram"
+      },
+      {
+        "label": "LeetCode",
+        "href": "https://leetcode.com",
+        "icon": "LeetCode"
+      }
+    ],
+    "availabilityHeading": "Open for internships and collaboration",
+    "availabilitySummary": "Have a project, internship opportunity, or collaboration idea? Send a message and I'll get back to you.",
+    "timezone": "IST (UTC+5:30)",
+    "preference": "Remote / Hybrid",
+    "status": "Actively interviewing",
+    "replyText": "Usually replies within 24 hours"
+  },
+  "footer": {
+    "description": "Developer portfolio built with clean UI, smooth motion, and a practical modern web stack.",
+    "copyright": "Copyright 2026 Pramith P Puthran. All rights reserved.",
+    "builtWith": "Built with Next.js, Tailwind CSS, and GSAP."
+  }
+}
