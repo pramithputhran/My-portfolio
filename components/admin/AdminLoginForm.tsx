@@ -50,20 +50,20 @@ export default function AdminLoginForm() {
               name="username"
               required
               autoComplete="username"
-              className="mt-2 h-12 w-full rounded border border-line bg-bg px-4 font-semibold text-text"
+              className="mt-2 h-12 w-full rounded border border-line bg-bg px-4 font-semibold text-text transition-colors outline-none focus:border-accent focus:ring-1 focus:ring-accent"
               placeholder="admin"
             />
           </label>
-          <label className="block">
+          <label className="block group">
             <span className="text-xs font-bold uppercase tracking-[0.16em] text-muted">Password</span>
-            <div className="mt-2 flex h-12 items-center rounded border border-line bg-bg px-4">
+            <div className="mt-2 flex h-12 items-center rounded border border-line bg-bg px-4 transition-colors focus-within:border-accent focus-within:ring-1 focus-within:ring-accent">
               <LockKeyhole className="mr-3 h-5 w-5 shrink-0 text-accent" />
               <input
                 name="password"
                 required
                 type="password"
                 autoComplete="current-password"
-                className="h-full min-w-0 flex-1 bg-transparent font-semibold text-text"
+                className="h-full min-w-0 flex-1 bg-transparent font-semibold text-text outline-none focus:outline-none focus:ring-0 border-none p-0"
                 placeholder="Enter password"
               />
             </div>
