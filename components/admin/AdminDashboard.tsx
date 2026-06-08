@@ -410,7 +410,7 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
                 <Field label="Overline" value={data.education.overline} onChange={(value) => setData({ ...data, education: { ...data.education, overline: value } })} />
                 <Field label="Heading" value={data.education.heading} onChange={(value) => setData({ ...data, education: { ...data.education, heading: value } })} />
               </div>
-              <ListHeader label="Education entries" onAdd={() => setData({ ...data, education: { ...data.education, entries: [...data.education.entries, blankEducation] } })} />
+              <ListHeader label="Education entries" onAdd={() => setData({ ...data, education: { ...data.education, entries: [blankEducation, ...data.education.entries] } })} />
               {data.education.entries.map((entry, index) => (
                 <ItemShell key={`${entry.title}-${index}`} title={entry.title} onDelete={() => setData({ ...data, education: { ...data.education, entries: data.education.entries.filter((_, itemIndex) => itemIndex !== index) } })}>
                   <div className="grid gap-4 md:grid-cols-2">
@@ -423,7 +423,7 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
                   </div>
                 </ItemShell>
               ))}
-              <ListHeader label="Certifications" onAdd={() => setData({ ...data, education: { ...data.education, certifications: [...data.education.certifications, { name: "New Certification", body: "Issuer", year: "2026", verifyHref: "#" }] } })} />
+              <ListHeader label="Certifications" onAdd={() => setData({ ...data, education: { ...data.education, certifications: [{ name: "New Certification", body: "Issuer", year: "2026", verifyHref: "#" }, ...data.education.certifications] } })} />
               {data.education.certifications.map((cert, index) => (
                 <ItemShell key={`${cert.name}-${index}`} title={cert.name} onDelete={() => setData({ ...data, education: { ...data.education, certifications: data.education.certifications.filter((_, itemIndex) => itemIndex !== index) } })}>
                   <div className="grid gap-4 md:grid-cols-2">
@@ -446,7 +446,7 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
                 <Field label="Exploring label" value={data.tools.exploringLabel} onChange={(value) => setData({ ...data, tools: { ...data.tools, exploringLabel: value } })} />
                 <Field label="Exploring, comma separated" value={arrayToCsv(data.tools.exploring)} onChange={(value) => setData({ ...data, tools: { ...data.tools, exploring: csvToArray(value) } })} />
               </div>
-              <ListHeader label="Tool grid items" onAdd={() => setData({ ...data, tools: { ...data.tools, items: [...data.tools.items, blankTool] } })} />
+              <ListHeader label="Tool grid items" onAdd={() => setData({ ...data, tools: { ...data.tools, items: [blankTool, ...data.tools.items] } })} />
               {data.tools.items.map((tool, index) => (
                 <ItemShell key={`${tool.name}-${index}`} title={tool.name} onDelete={() => setData({ ...data, tools: { ...data.tools, items: data.tools.items.filter((_, itemIndex) => itemIndex !== index) } })}>
                   <div className="grid gap-4 md:grid-cols-2">
@@ -458,7 +458,7 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
                   </div>
                 </ItemShell>
               ))}
-              <ListHeader label="Skill bars" onAdd={() => setData({ ...data, tools: { ...data.tools, bars: [...data.tools.bars, { label: "New skill", value: 80 }] } })} />
+              <ListHeader label="Skill bars" onAdd={() => setData({ ...data, tools: { ...data.tools, bars: [{ label: "New skill", value: 80 }, ...data.tools.bars] } })} />
               {data.tools.bars.map((bar, index) => (
                 <ItemShell key={`${bar.label}-${index}`} title={bar.label} onDelete={() => setData({ ...data, tools: { ...data.tools, bars: data.tools.bars.filter((_, itemIndex) => itemIndex !== index) } })}>
                   <div className="grid gap-4 md:grid-cols-2">
@@ -477,7 +477,7 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
                 <Field label="Heading" value={data.projects.heading} onChange={(value) => setData({ ...data, projects: { ...data.projects, heading: value } })} />
               </div>
               <TextBox label="Project section summary" value={data.projects.summary} onChange={(value) => setData({ ...data, projects: { ...data.projects, summary: value } })} />
-              <ListHeader label="Project cards" onAdd={() => setData({ ...data, projects: { ...data.projects, items: [...data.projects.items, blankProject] } })} />
+              <ListHeader label="Project cards" onAdd={() => setData({ ...data, projects: { ...data.projects, items: [blankProject, ...data.projects.items] } })} />
               {data.projects.items.map((project, index) => (
                 <ItemShell key={`${project.title}-${index}`} title={project.title} onDelete={() => setData({ ...data, projects: { ...data.projects, items: data.projects.items.filter((_, itemIndex) => itemIndex !== index) } })}>
                   <div className="grid gap-4 md:grid-cols-2">
