@@ -10,8 +10,8 @@ function initializeKV(): any {
   if (kvInitialized) return kv;
   kvInitialized = true;
 
-  const url = process.env.pramit_portfolio_KV_REST_API_URL;
-  const token = process.env.pramit_portfolio_KV_REST_API_TOKEN;
+  const url = process.env.pramit_portfolio_KV_REST_API_URL || process.env.KV_REST_API_URL;
+  const token = process.env.pramit_portfolio_KV_REST_API_TOKEN || process.env.KV_REST_API_TOKEN;
 
   if (!url || !token) {
     console.warn("Vercel KV not configured. Using local storage only.");
