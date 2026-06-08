@@ -4,9 +4,11 @@ import type { PortfolioData } from "./portfolio-types";
 
 // Create KV client with custom environment variable names
 let kv: any = null;
+let kvInitialized = false;
 
-function initializeKV() {
-  if (kv) return kv;
+function initializeKV(): any {
+  if (kvInitialized) return kv;
+  kvInitialized = true;
 
   const url = process.env.pramit_portfolio_KV_REST_API_URL;
   const token = process.env.pramit_portfolio_KV_REST_API_TOKEN;
@@ -16,9 +18,14 @@ function initializeKV() {
     return null;
   }
 
-  const { createClient } = require("@vercel/kv");
-  kv = createClient({ url, token });
-  return kv;
+  try {
+    const { createClient } = require("@vercel/kv");
+    kv = createClient({ url, token });
+    return kv;
+  } catch (error) {
+    console.warn("Failed to initialize Vercel KV:", error);
+    return null;
+  }
 }
 
 const DATA_PATH = path.join(process.cwd(), "data", "portfolio-data.json");
@@ -27,11 +34,11 @@ const KV_KEY = "portfolio-data";
 export async function getPortfolioData(): Promise<PortfolioData> {
   const kvClient = initializeKV();
 
-  if (kvClient) {
+  if (kvClient !== null) {
     try {
-      const data = await kvClient.get<PortfolioData>(KV_KEY);
+      const data = await (kvClient as any).get(KV_KEY);
       if (data) {
-        return data;
+        return data as PortfolioData;
       }
     } catch (error) {
       console.error("Failed to read from Vercel KV, falling back to local file:", error);
@@ -48,7 +55,7 @@ export async function savePortfolioData(data: PortfolioData) {
   let kvSuccess = false;
   let fsSuccess = false;
 
-  if (kvClient) {
+  if (kvClient !== null) {
     try {
       // Attempt to save to KV
       await kvClient.set(KV_KEY, data);

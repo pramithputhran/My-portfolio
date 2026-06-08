@@ -21,7 +21,7 @@ export default function Hero({ data, socialLinks }: { data: PortfolioData["hero"
   useEffect(() => {
     const interval = window.setInterval(() => setRole((value) => (value + 1) % roles.length), 1800);
     return () => window.clearInterval(interval);
-  }, []);
+  }, [roles.length]);
 
   useEffect(() => {
     let mm: { add: (query: string, callback: () => void | (() => void)) => void; revert: () => void } | undefined;
