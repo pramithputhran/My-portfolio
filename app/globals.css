@@ -199,6 +199,73 @@ textarea:focus-visible {
   transform: scale(0.92);
 }
 
+/* Toast animations */
+@keyframes toastSlideIn {
+  0% {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toastSlideOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+}
+
+@keyframes toastPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+:is(.react-hot-toast) {
+  animation: toastSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1) !important;
+}
+
+:is(.react-hot-toast.removing) {
+  animation: toastSlideOut 0.3s cubic-bezier(0.4, 0, 1, 1) !important;
+}
+
+:is(.react-hot-toast-default) {
+  background: rgb(var(--surface)) !important;
+  color: rgb(var(--text)) !important;
+  border: 1px solid rgb(var(--line)) !important;
+}
+
+:is(.react-hot-toast-success) {
+  background: rgb(var(--success) / 0.1) !important;
+  color: rgb(var(--success)) !important;
+  border: 1px solid rgb(var(--success) / 0.3) !important;
+}
+
+:is(.react-hot-toast-error) {
+  background: rgb(var(--accent-2) / 0.1) !important;
+  color: rgb(var(--accent-2)) !important;
+  border: 1px solid rgb(var(--accent-2) / 0.3) !important;
+}
+
+:is(.react-hot-toast-loading) {
+  background: rgb(var(--surface)) !important;
+  color: rgb(var(--text)) !important;
+  border: 1px solid rgb(var(--line)) !important;
+  animation: toastSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), toastPulse 2s ease-in-out infinite !important;
+}
+
 .reveal-up.revealed,
 .reveal-fade.revealed,
 .reveal-scale.revealed {

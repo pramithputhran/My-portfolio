@@ -245,8 +245,8 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
             <a href="/" target="_blank" className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-5 py-3 font-bold text-text hover:border-accent">
               View site <ExternalLink className="h-4 w-4" />
             </a>
-            <button type="button" onClick={save} disabled={saving} className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 font-bold text-bg hover:bg-accent2 disabled:opacity-70">
-              {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : saved ? <Check className="h-4 w-4" /> : <Save className="h-4 w-4" />}
+            <button type="button" onClick={save} disabled={saving} className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 font-bold text-bg hover:bg-accent2 disabled:opacity-70 transition-all duration-300">
+              {saving ? <Loader2 className="h-4 w-4" /> : saved ? <Check className="h-4 w-4" /> : <Save className="h-4 w-4" />}
               {saving ? "Saving" : saved ? "Saved" : "Save changes"}
             </button>
             <button type="button" onClick={logout} className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-5 py-3 font-bold text-text hover:border-accent2">
@@ -256,7 +256,36 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
         </div>
       </header>
 
-      <Toaster position="bottom-right" />
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          duration: 3500,
+          style: {
+            fontSize: '14px',
+            fontWeight: '500',
+            padding: '12px 16px',
+            letterSpacing: '0.5px'
+          },
+          success: {
+            iconTheme: {
+              primary: 'rgb(var(--success))',
+              secondary: 'transparent'
+            }
+          },
+          error: {
+            iconTheme: {
+              primary: 'rgb(var(--accent-2))',
+              secondary: 'transparent'
+            }
+          },
+          loading: {
+            iconTheme: {
+              primary: 'rgb(var(--accent))',
+              secondary: 'transparent'
+            }
+          }
+        }}
+      />
 
       <div className="container-shell grid gap-6 py-8 lg:grid-cols-[250px_1fr]">
         <aside className="lg:sticky lg:top-28 lg:h-fit">
