@@ -301,7 +301,6 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
 
       <Toaster
         position="bottom-right"
-        pauseOnHover={false}
         toastOptions={{
           duration: 3500,
           style: {

@@ -248,6 +248,12 @@ textarea:focus-visible {
   animation: customToastProgress 3.5s linear forwards;
 }
 
+/* Pause the timer bar animation if the user hovers over the toast, syncing with react-hot-toast's JS timeout */
+.toast-enter:hover .toast-progress,
+.toast-leave:hover .toast-progress {
+  animation-play-state: paused;
+}
+
 @keyframes toastSlideIn {
   0% {
     transform: translateX(400px);
