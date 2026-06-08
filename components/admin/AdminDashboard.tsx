@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { ChangeEvent, ReactNode } from "react";
 import { useMemo, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import type { ContactCard, EducationEntry, PortfolioData, ProjectItem, SocialLink, ToolItem } from "@/lib/portfolio-types";
 
 type AdminDashboardProps = {
@@ -194,6 +195,7 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
     setSaving(true);
     setSaved(false);
     setError("");
+    const toastId = toast.loading("Saving changes...");
     const response = await fetch("/api/admin/data", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -204,10 +206,12 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
     if (!response.ok) {
       const result = await response.json().catch(() => ({}));
       setError(result.message || "Could not save changes. Please check the data and try again.");
+      toast.error("Failed to save changes", { id: toastId });
       return;
     }
 
     setSaved(true);
+    toast.success("Successfully saved!", { id: toastId });
     window.setTimeout(() => setSaved(false), 1800);
   };
 
@@ -251,6 +255,8 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
           </div>
         </div>
       </header>
+
+      <Toaster position="bottom-right" />
 
       <div className="container-shell grid gap-6 py-8 lg:grid-cols-[250px_1fr]">
         <aside className="lg:sticky lg:top-28 lg:h-fit">

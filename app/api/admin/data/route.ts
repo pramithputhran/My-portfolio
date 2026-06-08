@@ -25,6 +25,12 @@ export async function PUT(request: Request) {
 
   try {
     await savePortfolioData(data);
+    
+    // Revalidate paths to clear Next.js cache
+    const { revalidatePath } = require("next/cache");
+    revalidatePath("/");
+    revalidatePath("/admin");
+    
     return NextResponse.json({ ok: true, updatedAt: new Date().toISOString() });
   } catch (error) {
     console.error("Save error:", error);
