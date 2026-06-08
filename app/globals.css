@@ -25,7 +25,7 @@
   --muted: 164 175 172;
   --line: 54 66 68;
   --accent: 86 211 179;
-  --accent-2: 255 122 146;
+  --accent-2: 170 40 50;
   --accent-3: 117 168 255;
   --shadow: 0 0 0;
   --success: 65 214 119;
@@ -175,9 +175,11 @@ textarea:focus-visible {
   0% {
     transform: translateX(-100%);
   }
+
   50% {
     transform: translateX(0%);
   }
+
   100% {
     transform: translateX(100%);
   }
@@ -200,11 +202,58 @@ textarea:focus-visible {
 }
 
 /* Toast animations */
+@keyframes customToastEnter {
+  0% {
+    transform: translateX(60px) scale(0.95);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes customToastLeave {
+  0% {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(60px) scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes customToastProgress {
+  0% {
+    transform: scaleX(1);
+  }
+
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+.toast-enter {
+  animation: customToastEnter 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.toast-leave {
+  animation: customToastLeave 0.3s ease-in forwards;
+}
+
+.toast-progress {
+  animation: customToastProgress 3.5s linear forwards;
+}
+
 @keyframes toastSlideIn {
   0% {
     transform: translateX(400px);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0);
     opacity: 1;
@@ -216,6 +265,7 @@ textarea:focus-visible {
     transform: translateX(0);
     opacity: 1;
   }
+
   100% {
     transform: translateX(400px);
     opacity: 0;
@@ -223,9 +273,12 @@ textarea:focus-visible {
 }
 
 @keyframes toastPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.8;
   }
@@ -274,13 +327,28 @@ textarea:focus-visible {
 }
 
 /* Stagger delays for child reveals */
-.reveal-delay-1 { transition-delay: 0.08s; }
-.reveal-delay-2 { transition-delay: 0.16s; }
-.reveal-delay-3 { transition-delay: 0.24s; }
-.reveal-delay-4 { transition-delay: 0.32s; }
-.reveal-delay-5 { transition-delay: 0.40s; }
+.reveal-delay-1 {
+  transition-delay: 0.08s;
+}
+
+.reveal-delay-2 {
+  transition-delay: 0.16s;
+}
+
+.reveal-delay-3 {
+  transition-delay: 0.24s;
+}
+
+.reveal-delay-4 {
+  transition-delay: 0.32s;
+}
+
+.reveal-delay-5 {
+  transition-delay: 0.40s;
+}
 
 @media (pointer: fine) and (min-width: 768px) {
+
   body.hide-default-cursor,
   body.hide-default-cursor a,
   body.hide-default-cursor button {
@@ -289,6 +357,7 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

@@ -15,7 +15,10 @@ import {
   Settings,
   Trash2,
   UserRound,
-  Wrench
+  Wrench,
+  X,
+  CheckCircle2,
+  AlertCircle
 } from "lucide-react";
 import type { ChangeEvent, ReactNode } from "react";
 import { useMemo, useState } from "react";
@@ -26,6 +29,39 @@ type AdminDashboardProps = {
   initialData: PortfolioData;
   username: string;
 };
+
+function CustomToast({ t, title, description, type = "success" }: { t: any; title: string; description: string; type: "success" | "error" }) {
+  const isSuccess = type === "success";
+  const Icon = isSuccess ? CheckCircle2 : AlertCircle;
+  const colorBase = isSuccess ? "bg-[#22c55e]" : "bg-[#ef4444]";
+  const iconBg = isSuccess ? "bg-[#22c55e]/15 text-[#22c55e]" : "bg-[#ef4444]/15 text-[#ef4444]";
+
+  return (
+    <div
+      className={`pointer-events-auto relative flex w-[340px] overflow-hidden rounded-2xl bg-white shadow-[0_12px_40px_-12px_rgba(0,0,0,0.15)] ring-1 ring-black/5 dark:bg-[#1c2225] dark:ring-white/10 ${t.visible ? "toast-enter" : "toast-leave"
+        }`}
+    >
+      <div className="flex w-full items-start p-4 pb-5">
+        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${iconBg}`}>
+          <Icon className="h-5 w-5" />
+        </div>
+        <div className="ml-3 flex-1 pt-0.5">
+          <p className="text-[15px] font-bold text-gray-900 dark:text-gray-100">{title}</p>
+          <p className="mt-1 text-[13px] font-semibold text-gray-500 dark:text-gray-400">{description}</p>
+        </div>
+        <button
+          onClick={() => toast.dismiss(t.id)}
+          className="ml-4 flex shrink-0 rounded-md p-1.5 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-500 focus:outline-none dark:text-gray-500 dark:hover:bg-white/5 dark:hover:text-gray-400"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
+      <div className={`absolute bottom-0 left-4 right-4 h-1.5 overflow-hidden rounded-t-md bg-gray-100 dark:bg-white/5 ${!t.visible ? "opacity-0 transition-opacity duration-200" : ""}`}>
+        <div className={`h-full w-full origin-left ${colorBase} toast-progress`} />
+      </div>
+    </div>
+  );
+}
 
 const sections = [
   { id: "site", label: "Site", icon: Settings },
@@ -195,7 +231,6 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
     setSaving(true);
     setSaved(false);
     setError("");
-    const toastId = toast.loading("Saving changes...");
     const response = await fetch("/api/admin/data", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -206,13 +241,17 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
     if (!response.ok) {
       const result = await response.json().catch(() => ({}));
       setError(result.message || "Could not save changes. Please check the data and try again.");
-      toast.error("Failed to save changes", { id: toastId });
+      toast.custom((t) => (
+        <CustomToast t={t} title="Error Occurred" description="Unable to connect to the server at present" type="error" />
+      ), { duration: 3500 });
       return;
     }
 
     setSaved(true);
-    toast.success("Successfully saved!", { id: toastId });
-    window.setTimeout(() => setSaved(false), 1800);
+    toast.custom((t) => (
+      <CustomToast t={t} title="Saved Successfully" description="Your changes have been saved successfully" type="success" />
+    ), { duration: 3500 });
+    window.setTimeout(() => setSaved(false), 2000);
   };
 
   const logout = async () => {
@@ -245,11 +284,15 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
             <a href="/" target="_blank" className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-5 py-3 font-bold text-text hover:border-accent">
               View site <ExternalLink className="h-4 w-4" />
             </a>
-            <button type="button" onClick={save} disabled={saving} className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 font-bold text-bg hover:bg-accent2 disabled:opacity-70 transition-all duration-300">
-              {saving ? <Loader2 className="h-4 w-4" /> : saved ? <Check className="h-4 w-4" /> : <Save className="h-4 w-4" />}
-              {saving ? "Saving" : saved ? "Saved" : "Save changes"}
+            <button type="button" onClick={save} disabled={saving} className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-bold transition-all duration-300 ease-out border shadow-sm min-w-[160px] ${saving ? "bg-surface text-accent border-accent/30 cursor-wait opacity-80" : saved ? "bg-[rgb(var(--success))] text-white border-[rgb(var(--success))] shadow-lg shadow-[rgb(var(--success))]/20" : "bg-accent text-bg border-accent hover:bg-accent2 hover:border-accent2 hover:shadow-lg hover:-translate-y-0.5"}`}>
+              {saving ? <Loader2 className="h-4 w-4 animate-spin" /> : saved ? <Check className="h-4 w-4" /> : <Save className="h-4 w-4" />}
+              {saving ? "Saving..." : saved ? "Saved!" : "Save changes"}
             </button>
-            <button type="button" onClick={logout} className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-5 py-3 font-bold text-text hover:border-accent2">
+            <button
+              type="button"
+              onClick={logout}
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-accent2 px-5 py-3 font-bold text-bg hover:bg-accent2/90 focus-visible:ring-4 focus-visible:ring-accent2/30 transition-colors"
+            >
               Logout <LogOut className="h-4 w-4" />
             </button>
           </div>
@@ -258,6 +301,7 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
 
       <Toaster
         position="bottom-right"
+        pauseOnHover={false}
         toastOptions={{
           duration: 3500,
           style: {
@@ -295,9 +339,8 @@ export default function AdminDashboard({ initialData, username }: AdminDashboard
                 key={id}
                 type="button"
                 onClick={() => setActive(id)}
-                className={`mb-1 flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left text-sm font-bold last:mb-0 ${
-                  active === id ? "bg-accent text-bg" : "text-muted hover:bg-bg hover:text-text"
-                }`}
+                className={`mb-1 flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left text-sm font-bold last:mb-0 ${active === id ? "bg-accent text-bg" : "text-muted hover:bg-bg hover:text-text"
+                  }`}
               >
                 <Icon className="h-4 w-4" />
                 {label}
@@ -555,7 +598,7 @@ function ListHeader({ label, onAdd }: { label: string; onAdd: () => void }) {
 
 function FixedSocialEditor({ items, setItems }: { items: SocialLink[]; setItems: (items: SocialLink[]) => void }) {
   const requiredIcons = ["Github", "Linkedin", "Instagram", "LeetCode"] as const;
-  
+
   const fixedItems = requiredIcons.map(icon => {
     return items.find(item => item.icon === icon) || { label: icon, href: "https://", icon };
   });
@@ -568,9 +611,9 @@ function FixedSocialEditor({ items, setItems }: { items: SocialLink[]; setItems:
           <div key={item.icon} className="rounded border border-line bg-bg p-4 flex items-center gap-4">
             <span className="w-24 font-bold text-text">{item.label}</span>
             <div className="flex-1">
-              <input 
-                type="text" 
-                value={item.href} 
+              <input
+                type="text"
+                value={item.href}
                 onChange={(e) => {
                   const newItems = [...fixedItems];
                   newItems[index] = { ...newItems[index], href: e.target.value };
