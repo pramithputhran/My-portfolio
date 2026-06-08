@@ -7,15 +7,15 @@ let kv: any = null;
 
 function initializeKV() {
   if (kv) return kv;
-  
+
   const url = process.env.pramit_portfolio_KV_REST_API_URL;
   const token = process.env.pramit_portfolio_KV_REST_API_TOKEN;
-  
+
   if (!url || !token) {
     console.warn("Vercel KV not configured. Using local storage only.");
     return null;
   }
-  
+
   const { createClient } = require("@vercel/kv");
   kv = createClient({ url, token });
   return kv;
@@ -26,7 +26,7 @@ const KV_KEY = "portfolio-data";
 
 export async function getPortfolioData(): Promise<PortfolioData> {
   const kvClient = initializeKV();
-  
+
   if (kvClient) {
     try {
       const data = await kvClient.get<PortfolioData>(KV_KEY);
