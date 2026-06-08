@@ -1,7 +1,12 @@
 import { promises as fs } from "fs";
 import path from "path";
-import { kv } from "@vercel/kv";
+import { createClient } from "@vercel/kv";
 import type { PortfolioData } from "./portfolio-types";
+
+const kv = createClient({
+  url: process.env.pramit_portfolio_KV_REST_API_URL,
+  token: process.env.pramit_portfolio_KV_REST_API_TOKEN,
+});
 
 const DATA_PATH = path.join(process.cwd(), "data", "portfolio-data.json");
 const KV_KEY = "portfolio-data";
