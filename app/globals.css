@@ -355,10 +355,20 @@ textarea:focus-visible {
 
 @media (pointer: fine) and (min-width: 768px) {
 
-  body.hide-default-cursor,
-  body.hide-default-cursor a,
-  body.hide-default-cursor button {
+  body.hide-default-cursor {
     cursor: none;
+  }
+
+  body.hide-default-cursor a,
+  body.hide-default-cursor button,
+  body.hide-default-cursor label {
+    cursor: pointer;
+  }
+
+  body.hide-default-cursor input,
+  body.hide-default-cursor textarea,
+  body.hide-default-cursor select {
+    cursor: text;
   }
 }
 

@@ -4,8 +4,17 @@ import { Check, Code2, Copy, Github, Instagram, Linkedin, Mail, MapPin, Phone, S
 import { FormEvent, useState } from "react";
 import type { PortfolioData } from "@/lib/portfolio-types";
 
+import { SiGithub, SiInstagram, SiLeetcode } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
+
 const contactIcons = { Mail, Phone, MapPin };
-const socialIcons: Record<string, any> = { Github, Linkedin, Instagram, Code2, LeetCode: Code2 };
+const brandMapping: Record<string, { icon: any; color: string }> = {
+  Github: { icon: SiGithub, color: "#FFFFFF" },
+  Linkedin: { icon: FaLinkedin, color: "#0A66C2" },
+  Instagram: { icon: SiInstagram, color: "#E4405F" },
+  LeetCode: { icon: SiLeetcode, color: "#FFA116" },
+  Code2: { icon: Code2, color: "#FFFFFF" }
+};
 
 export default function Contact({ data }: { data: PortfolioData["contact"] }) {
   const [sent, setSent] = useState(false);
@@ -54,7 +63,7 @@ export default function Contact({ data }: { data: PortfolioData["contact"] }) {
           {data.cards.map(({ icon, label, value, href }) => {
             const Icon = contactIcons[icon] || Mail;
             return (
-            <a key={label} href={href} className="group flex min-h-28 items-center gap-4 rounded border border-line bg-surface p-5 hover:border-accent">
+            <a key={label} href={href} className="group cursor-pointer flex min-h-28 items-center gap-4 rounded border border-line bg-surface p-5 hover:border-accent">
               <div className="grid h-12 w-12 shrink-0 place-items-center rounded bg-bg text-accent">
                 <Icon className="h-5 w-5" />
               </div>
@@ -71,10 +80,20 @@ export default function Contact({ data }: { data: PortfolioData["contact"] }) {
             {copied ? "Email copied" : "Copy email"} {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
           </button>
           {data.socialLinks.map(({ label, href, icon }) => {
-            const Icon = socialIcons[icon] || Github;
+            const brand = brandMapping[icon] || brandMapping["Github"];
+            const Icon = brand.icon;
             return (
-              <a key={label} href={href} className="grid h-12 w-12 place-items-center rounded-full border border-line bg-surface hover:border-accent" aria-label={label}>
-                <Icon className="h-5 w-5" />
+              <a 
+                key={label} 
+                href={href} 
+                className="group relative grid h-12 w-12 place-items-center rounded-full border border-line bg-surface transition-colors duration-300" 
+                aria-label={label}
+                style={{ "--hover-border": brand.color } as React.CSSProperties}
+              >
+                <div className="absolute inset-0 rounded-full border border-transparent transition-colors duration-300 group-hover:border-[var(--hover-border)]" />
+                <Icon 
+                  className="relative z-10 h-5 w-5 transition-colors duration-300 group-hover:text-[var(--hover-border)]" 
+                />
               </a>
             );
           })}

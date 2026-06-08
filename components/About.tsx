@@ -21,6 +21,7 @@ export default function About({ data }: { data: PortfolioData["about"] }) {
         gsap.to(".about-float-a", { y: -18, rotate: 8, duration: 4, repeat: -1, yoyo: true, ease: "sine.inOut" });
         gsap.to(".about-float-b", { y: 16, rotate: -8, duration: 4.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
         gsap.to(".about-float-c", { y: -12, x: 8, duration: 3.8, repeat: -1, yoyo: true, ease: "sine.inOut" });
+        gsap.to(".about-visual-wrapper", { y: -12, duration: 5, repeat: -1, yoyo: true, ease: "sine.inOut" });
 
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -52,7 +53,7 @@ export default function About({ data }: { data: PortfolioData["about"] }) {
     <section id="about" ref={rootRef} className="section-pad relative isolate overflow-hidden bg-surface">
       <div className="container-shell">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div className="relative mx-auto w-full max-w-[420px] lg:mx-0">
+          <div className="about-visual-wrapper relative mx-auto w-full max-w-[420px] lg:mx-0">
             <div className="about-frame absolute left-3 top-3 h-full w-full border-2 border-accent" />
             <div className="about-visual relative overflow-hidden rounded border border-line bg-bg p-5 shadow-sharp">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgb(var(--accent)/0.20),transparent_32%),radial-gradient(circle_at_85%_90%,rgb(var(--accent-3)/0.16),transparent_34%)]" />
@@ -104,12 +105,7 @@ export default function About({ data }: { data: PortfolioData["about"] }) {
             </div>
             <div className="about-float-c absolute bottom-8 right-10 h-3 w-3 rounded-full bg-accent" />
           </div>
-
-          <div className="mt-7 inline-flex items-center gap-3 rounded-full border border-line bg-bg px-4 py-2 text-sm font-bold text-text">
-            {data.currentBuildingLabel} <span className="text-accent">-&gt;</span>
-            <span className="h-4 w-[2px] animate-pulse bg-accent" />
           </div>
-        </div>
 
         <div className="about-copy min-w-0">
           <p className="text-sm font-bold uppercase tracking-[0.22em] text-accent">{data.overline}</p>

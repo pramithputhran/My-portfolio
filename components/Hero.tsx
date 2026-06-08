@@ -1,6 +1,8 @@
 "use client";
 
-import { ArrowDown, Code2, Download, ExternalLink, Github, Instagram, Linkedin } from "lucide-react";
+import { ArrowDown, Code2, Download, ExternalLink } from "lucide-react";
+import { SiGithub, SiInstagram, SiLeetcode } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -8,7 +10,14 @@ import type { PortfolioData, SocialLink } from "@/lib/portfolio-types";
 
 const blur =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgZmlsbD0iI2RkY2ZiZiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIi8+PC9zdmc+";
-const socialIcons: Record<string, any> = { Github, Linkedin, Instagram, Code2, LeetCode: Code2 };
+
+const brandMapping: Record<string, { icon: any; color: string }> = {
+  Github: { icon: SiGithub, color: "#FFFFFF" },
+  Linkedin: { icon: FaLinkedin, color: "#0A66C2" },
+  Instagram: { icon: SiInstagram, color: "#E4405F" },
+  LeetCode: { icon: SiLeetcode, color: "#FFA116" },
+  Code2: { icon: SiGithub, color: "#FFFFFF" }
+};
 
 export default function Hero({ data, socialLinks }: { data: PortfolioData["hero"]; socialLinks: SocialLink[] }) {
   const rootRef = useRef<HTMLElement>(null);
@@ -101,7 +110,8 @@ export default function Hero({ data, socialLinks }: { data: PortfolioData["hero"
 
           <div className="flex items-center gap-3 pt-1" aria-label="Social profile links">
             {socialLinks.map(({ label, href, icon }) => {
-              const Icon = socialIcons[icon] || Code2;
+              const brand = brandMapping[icon] || brandMapping["Github"];
+              const Icon = brand.icon;
               return (
                 <a
                   key={label}
@@ -110,9 +120,11 @@ export default function Hero({ data, socialLinks }: { data: PortfolioData["hero"
                   rel="noreferrer"
                   aria-label={label}
                   title={label}
-                  className="group grid h-12 w-12 place-items-center rounded-full border border-line bg-surface/70 text-text backdrop-blur transition-all hover:-translate-y-1 hover:border-accent hover:bg-accent hover:text-bg"
+                  className="group relative grid h-12 w-12 place-items-center rounded-full border border-line bg-surface/70 text-text backdrop-blur transition-all hover:-translate-y-1 hover:shadow-lg"
+                  style={{ "--hover-border": brand.color } as React.CSSProperties}
                 >
-                  <Icon className="h-5 w-5 transition-transform group-hover:scale-110" />
+                  <div className="absolute inset-0 rounded-full border border-transparent transition-colors duration-300 group-hover:border-[var(--hover-border)]" />
+                  <Icon className="relative z-10 h-5 w-5 transition-colors duration-300 group-hover:text-[var(--hover-border)]" />
                 </a>
               );
             })}

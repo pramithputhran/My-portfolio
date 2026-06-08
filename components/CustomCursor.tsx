@@ -32,10 +32,13 @@ export default function CustomCursor() {
     let targetDotScale = 1;
     let hasMoved = false;
     let raf = 0;
+    let isHoveringInteractive = false;
 
     const show = () => {
-      ring.style.opacity = "1";
-      dot.style.opacity = "1";
+      if (!isHoveringInteractive) {
+        ring.style.opacity = "1";
+        dot.style.opacity = "1";
+      }
     };
 
     const hide = () => {
@@ -70,10 +73,17 @@ export default function CustomCursor() {
 
     const handleHover = (event: Event) => {
       const target = event.target as HTMLElement;
-      const expandDot = Boolean(target.closest("a, button, input, textarea, h1, h2, h3, h4, h5, h6, label, img, p.uppercase, .font-display"));
+      isHoveringInteractive = Boolean(target.closest("a, button, input, textarea, select, label"));
       
-      targetDotScale = expandDot ? 3 : 1;
-      ring.style.borderColor = expandDot ? "transparent" : "";
+      if (isHoveringInteractive) {
+        ring.style.opacity = "0";
+        dot.style.opacity = "0";
+      } else {
+        show();
+        const expandDot = Boolean(target.closest("h1, h2, h3, h4, h5, h6, label, img, p.uppercase, .font-display"));
+        targetDotScale = expandDot ? 3 : 1;
+        ring.style.borderColor = expandDot ? "transparent" : "";
+      }
     };
 
     const handleLeave = () => hide();

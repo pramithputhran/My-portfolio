@@ -1,9 +1,17 @@
 import { ArrowUpRight, Code2, Github, Instagram, Linkedin, Mail, Phone } from "lucide-react";
 import Link from "next/link";
 import type { PortfolioData } from "@/lib/portfolio-types";
+import { SiGithub, SiInstagram, SiLeetcode } from "react-icons/si";
+import { FaLinkedin } from "react-icons/fa";
 
 const nav = ["about", "education", "tools", "projects", "contact"];
-const socialIcons: Record<string, any> = { Github, Linkedin, Instagram, Code2, LeetCode: Code2 };
+const brandMapping: Record<string, { icon: any; color: string }> = {
+  Github: { icon: SiGithub, color: "#FFFFFF" },
+  Linkedin: { icon: FaLinkedin, color: "#0A66C2" },
+  Instagram: { icon: SiInstagram, color: "#E4405F" },
+  LeetCode: { icon: SiLeetcode, color: "#FFA116" },
+  Code2: { icon: SiGithub, color: "#FFFFFF" }
+};
 
 export default function Footer({
   site,
@@ -58,10 +66,18 @@ export default function Footer({
             </div>
             <div className="mt-5 flex gap-3">
               {contact.socialLinks.map(({ label, href, icon }) => {
-                const Icon = socialIcons[icon] || Github;
+                const brand = brandMapping[icon] || brandMapping["Github"];
+                const Icon = brand.icon;
                 return (
-                  <a key={label} href={href} aria-label={label} className="grid h-10 w-10 place-items-center rounded-full border border-bg/25 hover:border-bg">
-                    <Icon className="h-4 w-4" />
+                  <a 
+                    key={label} 
+                    href={href} 
+                    aria-label={label} 
+                    className="group relative grid h-10 w-10 place-items-center rounded-full border border-bg/25 transition-colors duration-300"
+                    style={{ "--hover-border": brand.color } as React.CSSProperties}
+                  >
+                    <div className="absolute inset-0 rounded-full border border-transparent transition-colors duration-300 group-hover:border-[var(--hover-border)]" />
+                    <Icon className="relative z-10 h-4 w-4 transition-colors duration-300 group-hover:text-[var(--hover-border)]" />
                   </a>
                 );
               })}

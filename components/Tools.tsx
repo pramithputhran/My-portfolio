@@ -1,10 +1,28 @@
 "use client";
 
-import { Cloud, Code2, Database, Figma, GitBranch, Layers3, Server, Sparkles, Terminal, Wind } from "lucide-react";
+import { Code2 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { PortfolioData } from "@/lib/portfolio-types";
+import { 
+  SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiNodedotjs, 
+  SiExpress, SiMongodb, SiPostgresql, SiFigma, SiGreensock, 
+  SiGit, SiVercel 
+} from "react-icons/si";
 
-const toolIcons = { Cloud, Code2, Database, Figma, GitBranch, Layers3, Server, Sparkles, Terminal, Wind };
+const brandMapping: Record<string, { icon: any; color: string }> = {
+  "React": { icon: SiReact, color: "#61DAFB" },
+  "Next.js": { icon: SiNextdotjs, color: "#FFFFFF" },
+  "TypeScript": { icon: SiTypescript, color: "#3178C6" },
+  "Tailwind": { icon: SiTailwindcss, color: "#06B6D4" },
+  "Node.js": { icon: SiNodedotjs, color: "#339933" },
+  "Express": { icon: SiExpress, color: "#FFFFFF" },
+  "MongoDB": { icon: SiMongodb, color: "#47A248" },
+  "Postgres": { icon: SiPostgresql, color: "#4169E1" },
+  "Figma": { icon: SiFigma, color: "#F24E1E" },
+  "GSAP": { icon: SiGreensock, color: "#88CE02" },
+  "Git": { icon: SiGit, color: "#F05032" },
+  "Vercel": { icon: SiVercel, color: "#FFFFFF" }
+};
 
 export default function Tools({ data }: { data: PortfolioData["tools"] }) {
   const rootRef = useRef<HTMLElement>(null);
@@ -57,13 +75,26 @@ export default function Tools({ data }: { data: PortfolioData["tools"] }) {
         </div>
 
         <div className="mt-10 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6">
-          {visible.map(({ name, level, years, icon }) => {
-            const Icon = toolIcons[icon] || Code2;
+          {visible.map(({ name, level, years }) => {
+            const brand = brandMapping[name];
+            const Icon = brand?.icon || Code2;
+            const color = brand?.color || "currentColor";
+            
             return (
-              <div key={name} className="tool-item group relative grid aspect-square place-items-center rounded border border-line bg-bg p-4 text-center hover:border-accent">
-                <div>
-                  <Icon className="mx-auto h-10 w-10 text-accent transition-transform duration-200 group-hover:scale-110" />
-                  <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.12em] text-text">{name}</p>
+              <div 
+                key={name} 
+                className="tool-item group relative grid aspect-square place-items-center rounded border border-line bg-bg p-4 text-center transition-colors duration-300"
+                style={{ "--hover-border": color } as React.CSSProperties}
+              >
+                <div className="absolute inset-0 rounded border border-transparent transition-colors duration-300 group-hover:border-[var(--hover-border)]" />
+                <div className="relative z-10">
+                  <Icon 
+                    className="mx-auto h-10 w-10 transition-transform duration-300 group-hover:scale-110" 
+                    style={{ color }} 
+                  />
+                  <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.12em] text-text transition-colors duration-300 group-hover:text-[var(--hover-border)]">
+                    {name}
+                  </p>
                 </div>
                 <div className="pointer-events-none absolute -top-20 left-1/2 z-20 w-44 -translate-x-1/2 rounded border border-line bg-elevated p-3 text-left opacity-0 shadow-sharp transition-opacity group-hover:opacity-100">
                   <p className="text-sm font-bold text-text">{name}</p>
