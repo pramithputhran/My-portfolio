@@ -8,6 +8,8 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { PortfolioData, SocialLink } from "@/lib/portfolio-types";
 
+import GradientText from "./GradientText";
+
 const blur =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3QgZmlsbD0iI2RkY2ZiZiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIi8+PC9zdmc+";
 
@@ -82,11 +84,17 @@ export default function Hero({ data, socialLinks }: { data: PortfolioData["hero"
               ))}
             </span>
             <span className="mt-1 flex flex-wrap text-[clamp(2.25rem,5.5vw,4.75rem)]">
-              {nameWords.map((word) => (
-                <span key={word} className="mr-2 inline-block overflow-hidden pb-1 last:mr-0 sm:mr-4">
-                  <span className="hero-word inline-block bg-gradient-to-r from-text via-accent to-accent bg-clip-text text-transparent">{word}</span>
+              <span className="inline-block overflow-hidden pb-1">
+                <span className="hero-word inline-block">
+                  <GradientText
+                    colors={["#A5F3FC", "#67E8F9", "#34D399"]}
+                    animationSpeed={6}
+                    showBorder={false}
+                  >
+                    {data.name}
+                  </GradientText>
                 </span>
-              ))}
+              </span>
             </span>
           </h1>
 
